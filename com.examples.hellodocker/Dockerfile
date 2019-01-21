@@ -1,11 +1,4 @@
-FROM ubuntu:bionic
-
-RUN apt-get update && \
-	apt-get install -y openjdk-8-jdk && \
-	apt-get clean
-
-# Just to make sure Java can now be run in the container
-RUN java -version
+FROM openjdk:8
 
 COPY /target/hellodocker-0.0.1-SNAPSHOT.jar /app/app.jar
 
