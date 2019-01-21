@@ -39,6 +39,9 @@
                   <name>java-hello-java</name>
                   <build>
                     <dockerFileDir>${project.basedir}</dockerFileDir>
+                    <args>
+                      <jarToCopy>${project.artifactId}-${project.version}.jar</jarToCopy>
+                    </args>
                   </build>
                   <run>
                     <wait>
