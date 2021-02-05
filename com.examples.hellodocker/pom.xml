@@ -31,14 +31,14 @@
           <plugin>
             <groupId>io.fabric8</groupId>
             <artifactId>docker-maven-plugin</artifactId>
-            <version>0.28.0</version>
+            <version>0.34.1</version>
             <configuration>
               <showLogs>true</showLogs>
               <images>
                 <image>
                   <name>java-hello-java</name>
                   <build>
-                    <dockerFileDir>${project.basedir}</dockerFileDir>
+                    <contextDir>${project.basedir}</contextDir>
                     <args>
                       <jarToCopy>${project.artifactId}-${project.version}.jar</jarToCopy>
                     </args>
@@ -46,7 +46,6 @@
                   <run>
                     <wait>
                       <log>Hello World!</log>
-                      <exit>0</exit>
                       <time>10000</time>
                     </wait>
                   </run>
