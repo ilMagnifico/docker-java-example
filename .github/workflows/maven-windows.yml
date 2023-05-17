@@ -4,13 +4,15 @@ name: Java CI with Maven and Docker in Windows
 
 on:
   push:
+    branches:
+      - master
   pull_request:
+  schedule:
+    - cron: "0 7 * * 0"
 
 jobs:
   build:
     runs-on: windows-latest
-    env:
-      DOCKER_HOST: tcp://localhost:2375
 
     name: Build in Windows
     steps:
@@ -25,12 +27,6 @@ jobs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.yml') }}
         restore-keys: ${{ runner.os }}-m2-
-    - name: Docker config
-      run: sc config docker binpath="dockerd.exe --run-service -H tcp://localhost:2375"
-    - name: Docker restart
-      run: restart-service *docker*
-    - name: Docker info
-      run: docker info
     - name: Build with Maven
       run: mvn verify -Pdocker
       working-directory: com.examples.hellodocker
